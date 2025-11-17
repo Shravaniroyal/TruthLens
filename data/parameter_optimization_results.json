@@ -1,0 +1,82 @@
+{
+  "test_date": "2025-11-15 13:54:26",
+  "block_size_tests": [
+    {
+      "block_size": 8,
+      "duplicates": 205042,
+      "time_seconds": 86.09873962402344,
+      "docs_per_second": 0.011614571878366708
+    },
+    {
+      "block_size": 16,
+      "duplicates": 79250,
+      "time_seconds": 12.660181045532227,
+      "docs_per_second": 0.0789878119754772
+    },
+    {
+      "block_size": 24,
+      "duplicates": 18665,
+      "time_seconds": 3.7921693325042725,
+      "docs_per_second": 0.2637013045352645
+    },
+    {
+      "block_size": 32,
+      "duplicates": 10415,
+      "time_seconds": 1.8484559059143066,
+      "docs_per_second": 0.5409920771171263
+    }
+  ],
+  "ela_quality_tests": [
+    {
+      "quality": 85,
+      "ela_score": 0.36719403301628134,
+      "time_seconds": 0.2579970359802246
+    },
+    {
+      "quality": 90,
+      "ela_score": 0.28393301035146257,
+      "time_seconds": 0.14693999290466309
+    },
+    {
+      "quality": 95,
+      "ela_score": 0.08511582103763252,
+      "time_seconds": 0.1360013484954834
+    },
+    {
+      "quality": 98,
+      "ela_score": 0.08303565484416052,
+      "time_seconds": 0.15501880645751953
+    }
+  ],
+  "threshold_tests": [
+    {
+      "copymove_threshold": 3,
+      "fraud_detected": 5,
+      "fraud_rate": 100.0
+    },
+    {
+      "copymove_threshold": 5,
+      "fraud_detected": 5,
+      "fraud_rate": 100.0
+    },
+    {
+      "copymove_threshold": 10,
+      "fraud_detected": 5,
+      "fraud_rate": 100.0
+    },
+    {
+      "copymove_threshold": 20,
+      "fraud_detected": 5,
+      "fraud_rate": 100.0
+    }
+  ],
+  "performance_profile": {
+    "ela_time": 0.10971689224243164,
+    "copymove_no_seg_time": 4.411269664764404,
+    "segmentation_time": 0.6908919811248779,
+    "copymove_with_seg_time": 0.5979039669036865,
+    "font_time": 0.7654285430908203,
+    "total_with_segmentation": 2.1639413833618164,
+    "total_without_segmentation": 5.286415100097656
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "processed_at": "2025-11-15T15:05:15.920137",
+  "total_documents": 3,
+  "statistics": {
+    "total_processed": 3,
+    "cache_hits": 1,
+    "cache_misses": 0,
+    "fraud_detected": 2,
+    "authentic": 1,
+    "errors": 0,
+    "total_time": 4.399411916732788
+  },
+  "results": [
+    {
+      "fraud_detected": true,
+      "confidence": 86.07776201400553,
+      "ela_score": 0.08511582103763252,
+      "ela_suspicious": false,
+      "copymove_duplicates": 40922,
+      "copymove_suspicious": true,
+      "font_variation": 58.31840186305421,
+      "font_suspicious": true,
+      "suspicious_count": 2,
+      "segmentation_used": true,
+      "text_regions_excluded": 54,
+      "processing_time": 3.3936710357666016,
+      "processed_at": "2025-11-15T15:04:26.047261",
+      "file_path": "data/sample_documents/bank_statement_authentic.jpg",
+      "file_hash": "73f4aaea4c9bf396583eeed5f0da5487"
+    },
+    {
+      "fraud_detected": true,
+      "confidence": 85.86023219550418,
+      "ela_score": 0.11589618741980287,
+      "ela_suspicious": false,
+      "copymove_duplicates": 27521,
+      "copymove_suspicious": true,
+      "font_variation": 57.696592773932366,
+      "font_suspicious": true,
+      "suspicious_count": 2,
+      "segmentation_used": true,
+      "text_regions_excluded": 56,
+      "processing_time": 3.301342487335205,
+      "processed_at": "2025-11-15T15:05:14.880071",
+      "file_path": "data\\test_batch\\bank_statement_fake.jpg",
+      "file_hash": "b35d88c5349a7da73bf89a484955457e"
+    },
+    {
+      "fraud_detected": false,
+      "confidence": 66.60372625490606,
+      "ela_score": 0.1888212352818073,
+      "ela_suspicious": false,
+      "copymove_duplicates": 28,
+      "copymove_suspicious": true,
+      "font_variation": 13.579124434706147,
+      "font_suspicious": false,
+      "suspicious_count": 1,
+      "segmentation_used": true,
+      "text_regions_excluded": 17,
+      "processing_time": 1.0193901062011719,
+      "processed_at": "2025-11-15T15:05:15.920137",
+      "file_path": "data\\test_batch\\contract_authentic.jpg",
+      "file_hash": "688890fb545402c5a0248ee3589836ef"
+    }
+  ]
+}

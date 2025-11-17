@@ -1,0 +1,21 @@
+{
+  "result": {
+    "fraud_detected": true,
+    "confidence": 84.9084566501539,
+    "ela_score": 0.5497007410247438,
+    "ela_suspicious": false,
+    "copymove_duplicates": 33242,
+    "copymove_suspicious": true,
+    "font_variation": 55.27507069148645,
+    "font_suspicious": true,
+    "suspicious_count": 2,
+    "segmentation_used": true,
+    "text_regions_excluded": 26,
+    "processing_time": 9.665899991989136,
+    "processed_at": "2025-11-16T20:46:40.760169",
+    "file_path": "C:\\Users\\Shravani\\AppData\\Local\\Temp\\gradio\\0eaea5b706ed8affcb75b742fbe06e68e6d5fb40e5d7ccc21c58338bdcef171d\\bank_statement_fake_font_analysis.jpg",
+    "file_hash": "e3f589d94189be1a0ab928fecd1dc4b3"
+  },
+  "cached_at": "2025-11-16T20:46:40.760169",
+  "file_hash": "e3f589d94189be1a0ab928fecd1dc4b3"
+}

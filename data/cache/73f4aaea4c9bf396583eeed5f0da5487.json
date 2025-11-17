@@ -1,0 +1,21 @@
+{
+  "result": {
+    "fraud_detected": true,
+    "confidence": 86.07776201400553,
+    "ela_score": 0.08511582103763252,
+    "ela_suspicious": false,
+    "copymove_duplicates": 40922,
+    "copymove_suspicious": true,
+    "font_variation": 58.31840186305421,
+    "font_suspicious": true,
+    "suspicious_count": 2,
+    "segmentation_used": true,
+    "text_regions_excluded": 54,
+    "processing_time": 3.3936710357666016,
+    "processed_at": "2025-11-15T15:04:26.047261",
+    "file_path": "data/sample_documents/bank_statement_authentic.jpg",
+    "file_hash": "73f4aaea4c9bf396583eeed5f0da5487"
+  },
+  "cached_at": "2025-11-15T15:04:26.047261",
+  "file_hash": "73f4aaea4c9bf396583eeed5f0da5487"
+}

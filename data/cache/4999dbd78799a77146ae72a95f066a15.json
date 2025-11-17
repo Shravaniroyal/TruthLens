@@ -1,0 +1,21 @@
+{
+  "result": {
+    "fraud_detected": true,
+    "confidence": 86.21116193039701,
+    "ela_score": 0.1288187308359019,
+    "ela_suspicious": false,
+    "copymove_duplicates": 28251,
+    "copymove_suspicious": true,
+    "font_variation": 58.762304522026966,
+    "font_suspicious": true,
+    "suspicious_count": 2,
+    "segmentation_used": true,
+    "text_regions_excluded": 54,
+    "processing_time": 1.9316415786743164,
+    "processed_at": "2025-11-15T23:57:10.994904",
+    "file_path": "C:\\Users\\Shravani\\AppData\\Local\\Temp\\gradio\\c238d9d6ad69311b6fbe73c92bf2588f10a7b024e733d1314c9390b0dfb8f757\\bank_statement_extreme_fake.jpg",
+    "file_hash": "4999dbd78799a77146ae72a95f066a15"
+  },
+  "cached_at": "2025-11-15T23:57:10.994904",
+  "file_hash": "4999dbd78799a77146ae72a95f066a15"
+}

@@ -1,0 +1,21 @@
+{
+  "result": {
+    "fraud_detected": false,
+    "confidence": 66.60372625490606,
+    "ela_score": 0.1888212352818073,
+    "ela_suspicious": false,
+    "copymove_duplicates": 28,
+    "copymove_suspicious": true,
+    "font_variation": 13.579124434706147,
+    "font_suspicious": false,
+    "suspicious_count": 1,
+    "segmentation_used": true,
+    "text_regions_excluded": 17,
+    "processing_time": 1.0193901062011719,
+    "processed_at": "2025-11-15T15:05:15.920137",
+    "file_path": "data\\test_batch\\contract_authentic.jpg",
+    "file_hash": "688890fb545402c5a0248ee3589836ef"
+  },
+  "cached_at": "2025-11-15T15:05:15.920137",
+  "file_hash": "688890fb545402c5a0248ee3589836ef"
+}

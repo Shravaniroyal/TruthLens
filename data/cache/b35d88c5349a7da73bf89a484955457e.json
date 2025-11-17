@@ -1,0 +1,21 @@
+{
+  "result": {
+    "fraud_detected": true,
+    "confidence": 85.86023219550418,
+    "ela_score": 0.11589618741980287,
+    "ela_suspicious": false,
+    "copymove_duplicates": 27521,
+    "copymove_suspicious": true,
+    "font_variation": 57.696592773932366,
+    "font_suspicious": true,
+    "suspicious_count": 2,
+    "segmentation_used": true,
+    "text_regions_excluded": 56,
+    "processing_time": 3.301342487335205,
+    "processed_at": "2025-11-15T15:05:14.880071",
+    "file_path": "data\\test_batch\\bank_statement_fake.jpg",
+    "file_hash": "b35d88c5349a7da73bf89a484955457e"
+  },
+  "cached_at": "2025-11-15T15:05:14.880071",
+  "file_hash": "b35d88c5349a7da73bf89a484955457e"
+}

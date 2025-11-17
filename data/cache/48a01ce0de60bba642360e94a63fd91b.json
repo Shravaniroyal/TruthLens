@@ -1,0 +1,21 @@
+{
+  "result": {
+    "fraud_detected": true,
+    "confidence": 85.99054533117571,
+    "ela_score": 0.13541941400615576,
+    "ela_suspicious": false,
+    "copymove_duplicates": 28248,
+    "copymove_suspicious": true,
+    "font_variation": 58.10705540753324,
+    "font_suspicious": true,
+    "suspicious_count": 2,
+    "segmentation_used": true,
+    "text_regions_excluded": 56,
+    "processing_time": 2.4532673358917236,
+    "processed_at": "2025-11-15T23:46:24.032415",
+    "file_path": "temp_upload.jpg",
+    "file_hash": "48a01ce0de60bba642360e94a63fd91b"
+  },
+  "cached_at": "2025-11-15T23:46:24.032415",
+  "file_hash": "48a01ce0de60bba642360e94a63fd91b"
+}
