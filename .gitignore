@@ -1,29 +1,81 @@
-# Documentation (keep local only)
-docs/
-*.md.backup
-
 # Python
 __pycache__/
 *.py[cod]
 *$py.class
 *.so
 .Python
+*.pyc
+
+# Virtual Environment
 venv/
 env/
+ENV/
+.venv
 
-# Cache
+# Cache and temporary files
 data/cache/
 *.cache
+.pytest_cache/
 
-# IDE
+# IDE settings
 .vscode/
 .idea/
 *.swp
-
-# OS
+*.swo
 .DS_Store
 Thumbs.db
 
-# Large test files (optional)
-data/sample_documents/*.png
+# Large test files (optional - you can remove this if you want to upload test images)
 data/sample_documents/*.jpg
+data/sample_documents/*.png
+data/sample_documents/*.jpeg
+
+# Performance charts (generated files)
+data/*.png
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Jupyter Notebooks checkpoints
+.ipynb_checkpoints/
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+
+# Environments
+.env
+.venv
