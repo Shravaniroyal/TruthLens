@@ -359,42 +359,6 @@ Detects text tampering via font inconsistencies:
 
 ---
 
-## 📈 Roadmap
-
-### ✅ Week 1 (Complete)
-- [x] Core detection algorithms (ELA, Copy-Move, Font)
-- [x] Semantic segmentation integration
-- [x] Batch processing + caching
-- [x] Web interface (Gradio)
-- [x] CLI tool
-- [x] Performance optimization
-
-### 🔄 Month 2 (In Progress)
-- [ ] Real scanned document collection (1,000+ samples)
-- [ ] Create manipulated dataset (Photoshop edits)
-- [ ] Real-world accuracy validation
-- [ ] Performance benchmarking
-
-### 🔮 Month 3-4 (Planned)
-- [ ] Deep learning model integration (LayoutLM)
-- [ ] Vision-Language Model (LLaVA) evaluation
-- [ ] Replace Tesseract with PaddleOCR (3x faster)
-- [ ] Achieve 90%+ accuracy target
-
-### 🚀 Month 5-6 (Planned)
-- [ ] Cloud deployment (AWS/GCP)
-- [ ] Multi-user authentication
-- [ ] REST API
-- [ ] User dashboard
-- [ ] Target: 100 active users
-
-### 📚 Month 7-12 (Thesis)
-- [ ] Write thesis (7 chapters)
-- [ ] Submit research papers (2)
-- [ ] Grow to 1,000+ users
-- [ ] Prepare defense
-
----
 
 ## 🔧 Configuration
 
