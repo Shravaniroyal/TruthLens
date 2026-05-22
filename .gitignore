@@ -1,0 +1,93 @@
+# ============================================================
+#  TruthLens .gitignore
+#  Large files and folders that stay LOCAL ONLY
+#  Never pushed to GitHub
+# ============================================================
+
+# ── Model weights (too large for GitHub) ────────────────────
+models/
+*.pth
+*.pt
+*.ckpt
+*.h5
+
+# ── Dataset folders (stay on local machine) ─────────────────
+prepared_data/
+final_dataset_v4/
+indian_dataset/
+final_dataset/
+final_dataset_v2/
+final_dataset_v3/
+final_dataset_v3_fixed/
+training_data/
+training_data_v2/
+training_data_v3/
+real_datasets/
+doctamper_extracted/
+DocTamper/
+industry_datasets/
+real_test_documents/
+test_documents/
+
+# ── Zip files (large dataset archives) ──────────────────────
+*.zip
+*.tar
+*.tar.gz
+*.gz
+
+# ── Python ──────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+parts/
+var/
+sdist/
+develop-eggs/
+.installed.cfg
+lib/
+lib64/
+
+# ── Virtual environments ─────────────────────────────────────
+venv/
+.venv/
+env/
+ENV/
+.env
+
+# ── Jupyter Notebook checkpoints ────────────────────────────
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/*
+
+# ── OS files ─────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*.swo
+
+# ── IDE files ────────────────────────────────────────────────
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# ── Streamlit ────────────────────────────────────────────────
+.streamlit/secrets.toml
+
+# ── Logs and temp files ──────────────────────────────────────
+*.log
+*.tmp
+*.temp
+fraud_detection_results.png
+
+# ── Old archive folders ──────────────────────────────────────
+_archive_old_code/
+03_documentation/
+04_testing/
