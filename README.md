@@ -9,8 +9,9 @@
 [![Model](https://img.shields.io/badge/Model-EfficientNet--B4-orange?style=for-the-badge)](https://github.com/Shravaniroyal/TruthLens)
 [![Python](https://img.shields.io/badge/Python-3.9+-yellow?style=for-the-badge&logo=python)](https://python.org)
 [![Streamlit](https://img.shields.io/badge/Streamlit-1.28-red?style=for-the-badge&logo=streamlit)](https://streamlit.io)
+[![Kaggle](https://img.shields.io/badge/Kaggle-Training%20Notebook-20BEFF?style=for-the-badge&logo=kaggle)](https://www.kaggle.com/code/shravanirs4/truthlense-v4)
 
-*M.Tech Thesis Project — IIIT Dharwad, 2026*
+*M.Tech Thesis Project — IIIT Dharwad, 2026*  
 *Under the guidance of Dr. Utkarsh Mahadeo Khaire, Assistant Professor*
 
 </div>
@@ -23,7 +24,7 @@ TruthLens is an end-to-end AI system that detects forged documents in under 3 se
 
 Document fraud causes an estimated **USD 5 trillion** in annual losses globally. Existing solutions are too slow, too expensive, or inaccessible. TruthLens solves this with:
 
-- ✅ **98.18% accuracy** on a CVPR 2023 benchmark
+- ✅ **98.18% accuracy** on a CVPR 2023 benchmark — surpassing SOTA by 2.08 pp
 - ✅ **2.8 second** end-to-end inference on CPU
 - ✅ **Explainable verdicts** via Grad-CAM + Error Level Analysis
 - ✅ **Indian government document coverage** — first published system
@@ -33,14 +34,14 @@ Document fraud causes an estimated **USD 5 trillion** in annual losses globally.
 
 ## 🏆 Results
 
-| Metric | Value | Research Target |
-|--------|-------|----------------|
+| Metric | Value | Target |
+|--------|-------|--------|
 | Test Accuracy | **98.18%** | > 95% ✅ |
 | ROC-AUC | **0.9971** | > 0.99 ✅ |
 | Macro F1-Score | **0.98** | > 0.95 ✅ |
-| Indian Doc FP Rate | **0.8%** | < 5% ✅ |
+| Indian Doc False Positive Rate | **0.8%** | < 5% ✅ |
 | End-to-End Latency (CPU) | **2.80 s** | < 3 s ✅ |
-| SOTA Improvement | **+2.08 pp** over DocTamper CVPR 2023 | — |
+| Improvement over SOTA | **+2.08 pp** over DocTamper CVPR 2023 | — |
 
 Statistical significance: z = 5.11, **p < 0.0001**
 
@@ -49,34 +50,34 @@ Statistical significance: z = 5.11, **p < 0.0001**
 ## 🏗️ System Architecture
 
 ```
-Document Image (JPEG/PNG/WebP)
+Document Image (JPEG / PNG / WebP / BMP / TIF)
         │
         ▼
-┌─────────────────────┐
-│   Preprocessing     │  Resize → 224×224, ImageNet normalisation
-└─────────────────────┘
+┌─────────────────────────┐
+│     Preprocessing       │  Resize → 224×224 · ImageNet normalisation
+└─────────────────────────┘
         │
         ▼
-┌─────────────────────┐
-│  EfficientNet-B4    │  18.4M params, fine-tuned on 14,992 images
-│  Classification     │
-└─────────────────────┘
+┌─────────────────────────┐
+│    EfficientNet-B4      │  18.4M params · fine-tuned on 14,992 images
+│    Classification       │  Dual NVIDIA Tesla T4 · 30 epochs · 63 min
+└─────────────────────────┘
         │
         ▼
-┌─────────────────────┐
-│ Adaptive Threshold  │  p < 0.50 → REAL
-│    (τ = 0.85)       │  0.50 ≤ p < 0.85 → UNCERTAIN
-└─────────────────────┘  p ≥ 0.85 → FAKE
+┌─────────────────────────┐
+│  Adaptive Thresholding  │  p < 0.50          → REAL
+│      (τ = 0.85)         │  0.50 ≤ p < 0.85  → UNCERTAIN
+└─────────────────────────┘  p ≥ 0.85          → FAKE
         │
         ▼
-┌─────────────────────────────────────────────┐
-│              Explainability                  │
-│  Grad-CAM heatmap  |  ELA forensic map      │
-│  Human-readable forensic explanation        │
-└─────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────┐
+│                 Explainability                    │
+│  Grad-CAM heatmap  ·  ELA forensic map           │
+│  Human-readable forensic explanation             │
+└──────────────────────────────────────────────────┘
         │
         ▼
-  Verdict + Confidence + Downloadable JSON Report
+  Verdict · Confidence % · Downloadable JSON Report
 ```
 
 ---
@@ -85,90 +86,18 @@ Document Image (JPEG/PNG/WebP)
 
 ```
 TruthLens/
-├── app.py                        # Streamlit web application (main entry point)
-├── forensic_explainer.py         # Human-readable forensic explanation generator
-├── gradcam_truthlens.py          # Grad-CAM spatial attribution module
-├── generate_indian_docs.py       # Synthetic Indian document generator (Aadhaar, PAN, DL)
+├── app.py                           # Streamlit web application — main entry point
+├── forensic_explainer.py            # Human-readable forensic explanation generator
+├── gradcam_truthlens.py             # Grad-CAM spatial attribution module
+├── generate_indian_docs.py          # Synthetic Indian document generator
+│                                    #   (Aadhaar · PAN · DL — 10 states)
 ├── generate_synthetic_documents.py  # Extended synthetic document pipeline
-├── build_indian_dataset.py       # Dataset construction pipeline
-├── create_fakes.py               # Tampered document generation (ELA artefact injection)
-├── TruthLens_Training.ipynb      # Kaggle training notebook (dual T4 GPUs, 30 epochs)
-├── requirements.txt              # Python dependencies
+├── build_indian_dataset.py          # Dataset construction and split pipeline
+├── create_fakes.py                  # Tampered document generator (ELA artefact injection)
+├── TruthLens_Training.ipynb         # Kaggle training notebook (dual T4 · 30 epochs)
+├── requirements.txt                 # Python dependencies
 └── README.md
 ```
-
----
-
-## 🗄️ Dataset
-
-The TruthLens v4 dataset comprises **14,992 document images** from three sources:
-
-| Source | Real | Fake | Total |
-|--------|------|------|-------|
-| DocTamper CVPR 2023 | 4,200 | 4,200 | 8,400 |
-| RVL-CDIP | 1,700 | 0 | 1,700 |
-| Synthetic Indian Docs (Aadhaar, PAN, DL) | 2,400 | 2,400 | 4,800 |
-| **Total** | **8,300** | **6,600** | **14,992** |
-
-Split: **70% train / 15% validation / 15% test** — perfectly class-balanced.
-
-📦 **Dataset on Kaggle:** [TruthLens v4 Dataset](https://www.kaggle.com) *(link to your Kaggle dataset)*
-
----
-
-## 🇮🇳 Synthetic Indian Document Pipeline
-
-Real Indian government identity documents are protected under the **Aadhaar Act 2016** — collecting them for research without UIDAI authorisation is not legally permissible.
-
-TruthLens solves this with a novel synthetic generation pipeline (`generate_indian_docs.py`) that produces photorealistic:
-
-- **Aadhaar cards** — UIDAI orange gradient header, Ashoka Emblem, QR code, Devanagari text
-- **PAN cards** — Income Tax Department blue/white layout
-- **Driving Licences** — 10 Indian states (Karnataka, Maharashtra, Tamil Nadu, AP, Telangana, Rajasthan, UP, Delhi, West Bengal, Gujarat)
-
-Authentic documents saved at JPEG quality 95. Forged variants inject localised re-compression at quality 80, creating realistic ELA artefacts.
-
-> This is the **first published synthetic Indian government document generation pipeline** for fraud detection research.
-
----
-
-## 🤖 Model Details
-
-| Component | Specification |
-|-----------|--------------|
-| Backbone | EfficientNet-B4 (ImageNet pre-trained) |
-| Total Parameters | 18,467,145 |
-| Classification Head | FC(1792→512) → ReLU → FC(512→1) → Sigmoid |
-| Dropout | 0.4 (layer 1), 0.3 (layer 2) |
-| Optimiser | AdamW (backbone lr=1e-4, head lr=5e-4) |
-| Loss | BCEWithLogitsLoss + class weights |
-| Schedule | Cosine Annealing with Warm Restarts (T₀=10) |
-| Training | 30 epochs, dual NVIDIA Tesla T4, Kaggle Notebooks |
-| Best Checkpoint | Epoch 23 (val acc 97.95%) |
-
-**Model weights:** Download `best_truthlens_v4.pth` from [Google Drive](#) *(add your link)*
-Place it in a `models/` folder in the project root.
-
----
-
-## 🔬 Explainability
-
-### Grad-CAM Spatial Attribution
-Validated against DocTamper pixel-level ground-truth tampered region masks:
-- Mean IoU: **0.61**
-- 91.4% of documents achieve IoU > 0.30
-- 51.3% achieve IoU > 0.70 (strong alignment)
-
-### Error Level Analysis (ELA)
-- FBI forensics standard quality level (q = 95)
-- Detects 81.3% of forged documents
-- 4-level severity classification: clean / mild / moderate / strong
-
-### Adaptive Three-Class Thresholding
-Reduces Indian document false positives from **4.2% → 0.8%**:
-- `p < 0.50` → **REAL**
-- `0.50 ≤ p < 0.85` → **UNCERTAIN** (route to manual review)
-- `p ≥ 0.85` → **FAKE**
 
 ---
 
@@ -186,7 +115,10 @@ pip install -r requirements.txt
 ```
 
 ### 3. Download the model weights
-Download `best_truthlens_v4.pth` from https://drive.google.com/drive/folders/1rYDOQvBhArF0W-awQI6w7DQclIF--Qub?usp=sharing
+
+Download `best_truthlens_v4.pth` from Google Drive and place it in a `models/` folder:
+
+📥 **[Download Model Weights (Google Drive)](https://drive.google.com/drive/folders/1rYDOQvBhArF0W-awQI6w7DQclIF--Qub?usp=sharing)**
 
 ```
 TruthLens/
@@ -203,6 +135,98 @@ Open `http://localhost:8501` in your browser and upload any document image.
 
 ---
 
+## 🗄️ Dataset
+
+The TruthLens v4 dataset comprises **14,992 document images** from three sources:
+
+| Source | Real | Fake | Total |
+|--------|------|------|-------|
+| DocTamper CVPR 2023 | 4,200 | 4,200 | 8,400 |
+| RVL-CDIP | 1,700 | 0 | 1,700 |
+| Synthetic Indian Docs (Aadhaar · PAN · DL) | 2,400 | 2,400 | 4,800 |
+| **Total** | **8,300** | **6,600** | **14,992** |
+
+Split: **70% train / 15% validation / 15% test** — perfectly class-balanced.
+
+---
+
+## 🇮🇳 Synthetic Indian Document Pipeline
+
+Real Indian government identity documents are protected under the **Aadhaar Act 2016** — collecting them for research without UIDAI authorisation is not legally permissible.
+
+TruthLens solves this with a purpose-built synthetic generation pipeline (`generate_indian_docs.py`) producing photorealistic:
+
+- **Aadhaar cards** — UIDAI orange gradient header, Ashoka Emblem, QR code, Devanagari typography
+- **PAN cards** — Income Tax Department blue/white layout, Ashoka Emblem
+- **Driving Licences** — 10 Indian states with state-specific colours, emblems, and header languages
+
+| State | Language | Primary Colour |
+|-------|----------|----------------|
+| Karnataka | Kannada + English | Navy blue and gold |
+| Maharashtra | Marathi + English | Saffron and green |
+| Tamil Nadu | Tamil + English | Dark red and white |
+| Andhra Pradesh | Telugu + English | Green and white |
+| Telangana | Telugu + English | Dark pink and white |
+| Rajasthan | Hindi + English | Royal blue and white |
+| Uttar Pradesh | Hindi + English | Green and white |
+| Delhi | Hindi + English | Blue and white |
+| West Bengal | Bengali + English | Green and white |
+| Gujarat | Gujarati + English | Saffron and white |
+
+Authentic documents are saved at JPEG quality 95. Forged variants inject localised re-compression at quality 80, creating realistic ELA artefacts detectable by the forensic module.
+
+> **This is the first published synthetic Indian government document generation pipeline for fraud detection research.**
+
+---
+
+## 🤖 Model Details
+
+| Component | Specification |
+|-----------|--------------|
+| Backbone | EfficientNet-B4 (ImageNet pre-trained) |
+| Total Parameters | 18,467,145 |
+| Classification Head | FC(1792→512) → ReLU → Dropout(0.3) → FC(512→1) → Sigmoid |
+| Dropout | 0.4 (layer 1) · 0.3 (layer 2) |
+| Optimiser | AdamW — backbone lr=1×10⁻⁴ · head lr=5×10⁻⁴ |
+| Loss Function | BCEWithLogitsLoss with class weights (0.903 REAL · 1.136 FAKE) |
+| LR Schedule | Cosine Annealing with Warm Restarts (T₀=10, T_mult=2) |
+| Training Hardware | 2× NVIDIA Tesla T4 (Kaggle free tier) |
+| Training Time | ~63 minutes (30 epochs) |
+| Best Checkpoint | Epoch 23 · val acc 97.95% · val loss 0.2379 |
+
+📓 **[View Full Training Notebook on Kaggle](https://www.kaggle.com/code/shravanirs4/truthlense-v4)**
+
+---
+
+## 🔬 Explainability
+
+### Grad-CAM Spatial Attribution
+Validated against DocTamper pixel-level ground-truth tampered region masks (1,101 true-positive test images):
+
+| Metric | Value |
+|--------|-------|
+| Mean IoU | **0.61** |
+| Median IoU | 0.64 |
+| IoU > 0.70 (strong alignment) | 51.3% of documents |
+| IoU > 0.30 (partial alignment) | 91.4% of documents |
+
+### Error Level Analysis (ELA)
+FBI forensics standard quality level (q′ = 95):
+- Detects **81.3%** of forged documents
+- 4-level severity: clean / mild / moderate / strong
+- In-memory BytesIO buffer — 0.62 s computation
+
+### Adaptive Three-Class Thresholding
+Reduces Indian document false positives from **4.2% → 0.8%**:
+
+```
+p < 0.50          →  ✅ REAL       (likely authentic)
+0.50 ≤ p < 0.85   →  ⚠️ UNCERTAIN  (manual review recommended)
+p ≥ 0.85          →  ❌ FAKE       (likely fraudulent)
+```
+
+---
+
 ## 📊 Comparison with State of the Art
 
 | System | Accuracy | AUC | Indian Docs | Interface |
@@ -214,17 +238,22 @@ Open `http://localhost:8501` in your browser and upload any document image.
 | DocTamper CVPR 2023 | 96.1% | 0.982 | No | None |
 | **TruthLens v4 (Ours)** | **98.18%** | **0.9971** | **Yes** | **Web App** |
 
-*Kumar et al. use proprietary data not available for replication.
+*Kumar et al. use proprietary data — cannot be replicated.
 
 ---
 
-## 🧪 Training
+## ⚙️ Per-Component Latency
 
-The complete training pipeline is in `TruthLens_Training.ipynb`, designed for **Kaggle Notebooks** (free dual T4 GPU tier).
+| Component | Time | Share |
+|-----------|------|-------|
+| File upload and decode | 0.08 s | 2.9% |
+| Preprocessing | 0.04 s | 1.4% |
+| EfficientNet-B4 forward pass | 1.80 s | 64.3% |
+| Grad-CAM backward pass | 0.18 s | 6.4% |
+| ELA computation | 0.62 s | 22.1% |
+| Forensic explanation | 0.08 s | 2.9% |
+| **Total end-to-end (CPU)** | **2.80 s** | **100%** |
 
-Training time: ~63 minutes on dual NVIDIA Tesla T4 GPUs.
-
-📓 **Kaggle Notebook:** [TruthLens Training](https://www.kaggle.com/code/shravanirs4/truthlense-v4) 
 ---
 
 ## 📋 Requirements
@@ -239,6 +268,8 @@ numpy>=1.24.0
 scikit-learn>=1.2.0
 opencv-python>=4.7.0
 matplotlib>=3.7.0
+pytesseract>=0.3.10
+qrcode>=7.4.0
 ```
 
 ---
@@ -261,12 +292,22 @@ If you use TruthLens in your research, please cite:
 
 ## 👩‍💻 Author
 
-**Shravani R S**
-M.Tech Data Science and Artificial Intelligence
-Indian Institute of Information Technology Dharwad
-Roll No: 25MDA135
+**Shravani R S**  
+M.Tech — Data Science and Artificial Intelligence  
+Roll No: 25MDA135  
+Indian Institute of Information Technology Dharwad, Karnataka — 580 009
 
-*Under the guidance of Dr. Utkarsh Mahadeo Khaire, Assistant Professor, Dept. of CSE, IIIT Dharwad*
+*Under the guidance of **Dr. Utkarsh Mahadeo Khaire**, Assistant Professor, Dept. of CSE, IIIT Dharwad*
+
+---
+
+## 🔗 Links
+
+| Resource | Link |
+|----------|------|
+| 🏋️ Training Notebook | [Kaggle — TruthLense v4](https://www.kaggle.com/code/shravanirs4/truthlense-v4) |
+| 📦 Model Weights | [Google Drive](https://drive.google.com/drive/folders/1rYDOQvBhArF0W-awQI6w7DQclIF--Qub?usp=sharing) |
+| 🏫 Institution | [IIIT Dharwad](https://www.iiitdwd.ac.in) |
 
 ---
 
