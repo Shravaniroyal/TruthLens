@@ -82,6 +82,8 @@ desktop.ini
 .streamlit/secrets.toml
 
 # ── Logs and temp files ──────────────────────────────────────
+data/
+logs/
 *.log
 *.tmp
 *.temp
