@@ -92,4 +92,5 @@ fraud_detection_results.png
 # ── Old archive folders ──────────────────────────────────────
 _archive_old_code/
 03_documentation/
-04_testing/
+04_testing/main*.tex
+Thesis_Template*.pdf
