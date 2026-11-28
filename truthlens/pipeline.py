@@ -46,6 +46,7 @@ class CaseResult:
     elapsed_ms: float
     timings: dict[str, float] = field(default_factory=dict)
     ocr_available: bool = False
+    scope_note: str = ""
 
     def to_public_dict(self) -> dict[str, Any]:
         forensic: dict[str, Any] | None = None
@@ -76,7 +77,29 @@ class CaseResult:
             "official": self.official.to_dict(),
             "elapsed_ms": round(self.elapsed_ms, 1),
             "disclaimer": DISCLAIMER,
+            "scope_note": self.scope_note,
         }
+
+
+VALIDATED_TYPES = {"aadhaar", "pan", "dl"}  # edit: only types you actually tested
+
+
+def apply_scope_gate(analysis, media_kind: str, doc_type: str):
+    """Cap model verdict at UNCERTAIN outside the validated scope (image of a validated ID type)."""
+    if analysis is None:
+        return None, ""
+    in_scope = media_kind == "image" and doc_type in VALIDATED_TYPES
+    v = analysis.verdict
+    if in_scope or v.label == "UNCERTAIN":
+        return analysis, ""
+    original = v.label
+    object.__setattr__(v, "label", "UNCERTAIN")
+    note = (
+        "Outside validated scope (PDF or unsupported document type): "
+        f"model said {original}, shown as UNCERTAIN. Manual review needed."
+    )
+    log.info("Scope gate: %s -> UNCERTAIN | kind=%s | type=%s", original, media_kind, doc_type)
+    return analysis, note
 
 
 def _qr_mismatch(ocr_text: str, qr: QrResult, fields: ExtractedFields) -> bool:
@@ -137,10 +160,12 @@ def analyze_document(
     official = cross_verify(fields)
 
     analysis: AnalysisResult | None = None
+    scope_note = ""
     if run_model:
         t = time.perf_counter()
         analysis = analyze_image(primary)
         timings["forensic_ms"] = (time.perf_counter() - t) * 1000
+        analysis, scope_note = apply_scope_gate(analysis, validated.media_kind, doc_type)
 
     elapsed = (time.perf_counter() - t0) * 1000
     timings["total_ms"] = elapsed
@@ -171,4 +196,5 @@ def analyze_document(
         elapsed_ms=elapsed,
         timings=timings,
         ocr_available=bool(ocr_text),
+        scope_note=scope_note,
     )
