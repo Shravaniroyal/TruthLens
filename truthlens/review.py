@@ -15,7 +15,7 @@ import re
 import threading
 import uuid
 from dataclasses import asdict, dataclass, field
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
@@ -137,6 +137,28 @@ class ReviewStore:
             self._write(item)
         return item
 
+    def purge_older_than(self, days: int) -> int:
+        """Delete review items created more than `days` days ago. Returns count removed."""
+        cutoff = datetime.now(timezone.utc) - timedelta(days=days)
+        removed = 0
+        with self._lock:
+            for p in list(self.dir.glob("*.json")) + list(self.dir.glob("*.tmp")):
+                try:
+                    if p.suffix == ".tmp":
+                        p.unlink(missing_ok=True)
+                        continue
+                    created = datetime.fromisoformat(
+                        json.loads(p.read_text(encoding="utf-8")).get("created_at", "1970-01-01T00:00:00+00:00")
+                    )
+                    if created.tzinfo is None:
+                        created = created.replace(tzinfo=timezone.utc)
+                    if created < cutoff:
+                        p.unlink(missing_ok=True)
+                        removed += 1
+                except Exception:
+                    continue
+        return removed
+
     def _write(self, item: ReviewItem) -> None:
         tmp = self._path(item.id).with_suffix(".tmp")
         tmp.write_text(json.dumps(asdict(item), indent=2), encoding="utf-8")
@@ -207,3 +229,10 @@ def queue_case(case: Any, *, workflow: str = "", case_id: str = "", operator: st
         case_id=case_id,
         operator=operator,
     )
+
+
+def purge_old_reviews() -> int:
+    """Apply TRUTHLENS_RETENTION_DAYS to the review store."""
+    from truthlens.config import settings
+
+    return get_store().purge_older_than(settings.retention_days)

@@ -16,6 +16,7 @@ from truthlens.bgv import WORKFLOWS, evaluate_workflow
 from truthlens.config import settings
 from truthlens.exceptions import AuthError, TruthLensError
 from truthlens.jobs import create_job, get_job, purge_old_jobs
+from truthlens.review import purge_old_reviews
 from truthlens.logging_setup import setup_logging
 from truthlens.official import DISCLAIMER, cross_verify
 from truthlens.fields import ExtractedFields
@@ -38,6 +39,7 @@ def create_app() -> FastAPI:
     async def lifespan(_app: FastAPI):
         settings.data_dir.mkdir(parents=True, exist_ok=True)
         purge_old_jobs()
+    purge_old_reviews()
         yield
 
     app = FastAPI(
