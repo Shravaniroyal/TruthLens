@@ -94,7 +94,7 @@ def validate_upload(file_bytes: bytes, original_filename: str) -> ValidatedUploa
     ext = _extension_of(safe_name)
     size = len(file_bytes)
 
-    log.debug("Validating upload | name=%s | ext=%s | size=%d", safe_name, ext, size)
+    log.debug("Validating upload | ext=%s | size=%d", ext, size)
 
     if size == 0:
         audit_event("upload_rejected", reason="empty_file")

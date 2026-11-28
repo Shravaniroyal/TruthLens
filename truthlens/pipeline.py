@@ -128,7 +128,7 @@ def analyze_document(
     qr = scan_qr(primary)
     timings["ocr_qr_ms"] = (time.perf_counter() - t) * 1000
     if ocr_text:
-        log.debug("OCR (redacted)=%s", ocr_log_safe(ocr_text))
+        log.debug("OCR text length=%d chars", len(ocr_text or ""))
 
     combined = f"{ocr_text} {qr.payload}".strip()
     fields = extract_fields(combined)

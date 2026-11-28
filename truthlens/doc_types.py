@@ -74,5 +74,5 @@ def detect_doc_type(filename: str, text: str = "") -> str:
             log.debug("Doc type detected: %s", dtype)
             return dtype
 
-    log.debug("Doc type detected: generic (filename=%s)", filename)
+    log.debug("Doc type detected: generic")
     return "generic"
