@@ -20,6 +20,7 @@ from truthlens.logging_setup import setup_logging
 from truthlens.official import DISCLAIMER, cross_verify
 from truthlens.fields import ExtractedFields
 from truthlens.pipeline import analyze_document
+from truthlens.review import ReviewStore, make_router
 
 setup_logging()
 
@@ -40,15 +41,21 @@ def create_app() -> FastAPI:
         yield
 
     app = FastAPI(
+        
         title="TruthLens API",
         version=__version__,
         description=(
             "Document forensic screening + OCR/QR + BGV checklists. "
             "Official government verify is a stub until API keys are added."
+            
         ),
         lifespan=lifespan,
     )
 
+    review_store = ReviewStore(settings.data_dir / "reviews")
+    app.include_router(make_router(review_store))
+
+    
     app.add_middleware(
         CORSMiddleware,
         allow_origins=["http://localhost", "http://127.0.0.1", "http://localhost:8501"],
