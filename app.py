@@ -193,12 +193,17 @@ def _render_single(saved: dict, img_pil: Image.Image, safe_name: str) -> None:
     if saved.get("review_id"):
         st.info(f"Added to the **Review queue** (ID `{saved['review_id']}`). A reviewer can accept, reject or ask for the original.")
 
-    st.markdown('<div class="section-tag">EXPLAINABILITY</div>', unsafe_allow_html=True)
-    st.markdown('<div class="section-title">🔥 Where did the model look?</div>', unsafe_allow_html=True)
     gcam_pil = saved["gcam"]
-    st.image(gcam_pil, use_container_width=True)
+    gated = bool(getattr(case, "scope_note", ""))
+    if gated:
+        st.warning(case.scope_note)
+    if not gated:
+        st.markdown('<div class="section-tag">EXPLAINABILITY</div>', unsafe_allow_html=True)
+        st.markdown('<div class="section-title">🔥 Where did the model look?</div>', unsafe_allow_html=True)
+        gcam_pil = saved["gcam"]
+        st.image(gcam_pil, use_container_width=True)
 
-    if v.label in ("FAKE", "UNCERTAIN"):
+    if v.label in ("FAKE", "UNCERTAIN") and not gated:
         st.markdown('<div class="section-tag">FORENSIC ANALYSIS</div>', unsafe_allow_html=True)
         st.markdown(
             '<div class="section-title">🔬 Why was this flagged?</div>', unsafe_allow_html=True
