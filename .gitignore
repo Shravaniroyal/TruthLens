@@ -82,7 +82,6 @@ desktop.ini
 .streamlit/secrets.toml
 
 # ── Logs and temp files ──────────────────────────────────────
-data/
 logs/
 *.log
 *.tmp
@@ -93,4 +92,6 @@ fraud_detection_results.png
 _archive_old_code/
 03_documentation/
 04_testing/main*.tex
+data/
+main*.tex
 Thesis_Template*.pdf
