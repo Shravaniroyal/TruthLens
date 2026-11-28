@@ -13,6 +13,7 @@ from truthlens.bgv import evaluate_workflow
 from truthlens.config import settings
 from truthlens.logging_setup import get_logger
 from truthlens.pipeline import analyze_document
+from truthlens.review import queue_case
 
 log = get_logger("jobs")
 _lock = threading.Lock()
@@ -35,6 +36,8 @@ def create_job(workflow_id: str, operator: str, files: list[tuple[str, bytes]]) 
         "status": "queued",
         "workflow_id": workflow_id,
         "operator": operator,
+        "case_id": f"job-{job_id}",
+        "queued": 0,
         "created_at": datetime.now(timezone.utc).isoformat(),
         "file_count": len(files),
         "results": [],
@@ -79,6 +82,17 @@ def _run_job(job_id: str, workflow_id: str, files: list[tuple[str, bytes]]) -> N
             case = analyze_document(data, name, run_model=True)
             payload = case.to_public_dict()
             results.append(payload)
+            try:
+                item = queue_case(
+                    case,
+                    workflow=workflow_id,
+                    case_id=rec.get("case_id", f"job-{job_id}"),
+                    operator=rec.get("operator", ""),
+                )
+                if item is not None:
+                    rec["queued"] = rec.get("queued", 0) + 1
+            except Exception:
+                log.exception("Job %s: review queue failed for one file", job_id)
             types.append(case.doc_type)
             rec["results"] = results
             _write(rec)
